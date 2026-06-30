@@ -54,9 +54,11 @@ and backend system design.
 - [LeetCode](https://leetcode.com/) — timed practice once patterns are learned
 
 ### 🔜 Up Next — Java + Spring Boot
-- [Telusko](https://www.youtube.com/@Telusko) — Core Java depth + Spring Boot fundamentals
-- [in28Minutes](https://www.youtube.com/@in28minutes) — REST API / Spring Boot practical course
-- [Baeldung](https://www.baeldung.com/) — reference docs while building
+- **Foundation already in progress →** [java-learning-journey](https://github.com/mahesh-lute-9/java-learning-journey) 
+  *(Core Java basics to JVM internals — active repo)*
+- [Telusko](https://www.youtube.com/@Telusko) — Spring Boot fundamentals
+- [in28Minutes](https://www.youtube.com/@in28minutes) — REST APIs practical
+- [Baeldung](https://www.baeldung.com/) — reference while building
 - **Goal:** 2 portfolio projects (REST API + JWT auth, DB-backed CRUD app)
 
 ### 🔜 Up Next — System Design Basics
