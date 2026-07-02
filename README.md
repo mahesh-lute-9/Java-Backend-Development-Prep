@@ -1,8 +1,9 @@
 # Java Backend Developer Prep — A Complete Journey
 
-Daily/weekly log of preparation for Java backend developer roles at top tech 
-companies. Covers all CS fundamentals essential for product company interviews 
-— tracked from day one as I build toward interview-ready depth.
+A structured roadmap and progress tracker for preparation toward Java backend 
+developer roles at top product-based companies. Covers all CS fundamentals 
+essential for product company interviews — tracked as I build toward 
+interview-ready depth.
 
 This repo doubles as a revision guide — not just a diary of what I did, but 
 a reference for *why* things work the way they do. Useful for anyone following 
@@ -18,14 +19,39 @@ system design.
 - **Looking for notes and solved problems?** Each subject has its own folder — 
   concept notes and solutions with reasoning on *why* each approach works, not 
   just what the answer is.
-- **Want to follow along?** [`progress.md`](./progress.md) has the daily/weekly 
+- **Want to follow along?** [`progress.md`](./progress.md) has the weekly 
   log of what's being covered.
 - **Revisiting a topic?** Each subject folder will have a cheat-sheet summary 
   once that phase wraps up — common patterns, gotchas, quick-reference notes.
 
+## 🔗 Active Right Now
+Java fundamentals are actively being built here →
+**[java-learning-journey](https://github.com/mahesh-lute-9/java-learning-journey)**
+*(Core Java from basics to JVM internals — daily practice, notes, and internals)*
+
+Everything in this repo is planned and will be picked up in sequence. 
+Progress is logged in [`progress.md`](./progress.md) as each track begins.
+
+---
+
 ## 🗺️ Roadmap
 
-### ✅ Currently Active — SQL & DBMS
+### 🔜 DSA
+
+| Purpose | Resource |
+|---|---|
+| 📋 Problem Sheet | [Striver's A2Z DSA Sheet](https://takeuforward.org/) |
+| 🎥 Video / Concept | *(to be updated)* |
+| 🔥 Interview Drilling | [LeetCode](https://leetcode.com/) |
+
+> 💡 Topic order: Arrays → Strings → Two Pointers → Sliding Window → 
+> Linked Lists → Stacks/Queues → Binary Search → Trees → Graphs → DP.
+> Pattern recognition over problem memorization — learn the pattern, 
+> apply it across problems.
+
+---
+
+### 🔜 SQL & DBMS
 
 #### SQL
 | Purpose | Resource |
@@ -48,22 +74,7 @@ system design.
 
 ---
 
-### ✅ Currently Active — DSA
-
-| Purpose | Resource |
-|---|---|
-| 📋 Problem Sheet | [Striver's A2Z DSA Sheet](https://takeuforward.org/) |
-| 🎥 Video / Concept | *(to be updated)* |
-| 🔥 Interview Drilling | [LeetCode](https://leetcode.com/) |
-
-> 💡 Topic order: Arrays → Strings → Two Pointers → Sliding Window → 
-> Linked Lists → Stacks/Queues → Binary Search → Trees → Graphs → DP.
-> Pattern recognition over problem memorization — learn the pattern, 
-> apply it across problems.
-
----
-
-### 🔄 Parallel Track — Operating Systems
+### 🔜 Operating Systems
 
 | Purpose | Resource |
 |---|---|
@@ -76,7 +87,7 @@ system design.
 
 ---
 
-### 🔄 Parallel Track — Computer Networks
+### 🔜 Computer Networks
 
 | Purpose | Resource |
 |---|---|
@@ -89,7 +100,7 @@ system design.
 
 ---
 
-### 🔜 Up Next — Java + Spring Boot
+### 🔜 Java + Spring Boot
 
 - **Foundation already in progress →** [java-learning-journey](https://github.com/mahesh-lute-9/java-learning-journey)
   *(Core Java from basics to JVM internals — active repo)*
@@ -103,7 +114,7 @@ system design.
 
 ---
 
-### 🔜 Up Next — System Design
+### 🔜 System Design
 
 | Purpose | Resource |
 |---|---|
@@ -117,32 +128,31 @@ system design.
 ---
 
 ## 📈 Progress
-See [`progress.md`](./progress.md) for the daily/weekly log — topics covered, 
-problems solved, and notes on weak areas.
+See [`progress.md`](./progress.md) for the weekly log — tracks started, 
+topics covered, problems solved, and notes on weak areas.
 
 ## 🗂️ Repo Structure
-
 ```
 backend-dev-prep/
 ├── README.md                    # overview + roadmap + how to use
-├── progress.md                  # daily/weekly log
+├── progress.md                  # weekly log
 ├── sql/
 │   ├── joins/
 │   ├── aggregations/
 │   ├── window-functions/
 │   └── subqueries/
 ├── dbms/
-│   └── notes.md                 # normalization, ACID, indexing notes
+│   └── notes.md
 ├── os/
-│   └── notes.md                 # processes, scheduling, deadlocks notes
+│   └── notes.md
 ├── cn/
-│   └── notes.md                 # OSI, TCP/IP, HTTP, DNS notes
+│   └── notes.md
 ├── dsa/
 │   ├── arrays/
 │   ├── linked-lists/
 │   ├── trees/
 │   └── dp/
-└── projects.md                  # links to separate Spring Boot project repos
+└── projects.md
 ```
 
 ## 📌 Notes
