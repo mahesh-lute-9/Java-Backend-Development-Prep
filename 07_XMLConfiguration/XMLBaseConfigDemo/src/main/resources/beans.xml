@@ -50,13 +50,43 @@
 
 <!--  What if there are multiple beans of same type, THE SOLUTION  -->
 <!--    primary="true" -->
-    <bean id="upiPaymentService" class="org.example.payment.UPIPaymentService"/>
+<!--    <bean id="upiPaymentService" class="org.example.payment.UPIPaymentService"/>-->
 
-    <bean id="cardPaymentService" class="org.example.payment.CardPaymentService"/>
+<!--    <bean id="cardPaymentService" class="org.example.payment.CardPaymentService"/>-->
 <!--  just referring to the PaymentService class which we need and bean should be created -->
-    <bean id="orderService" class="org.example.OrderService">
-        <constructor-arg ref="upiPaymentService"/>
-    </bean>
+<!--    <bean id="orderService" class="org.example.OrderService">-->
+<!--        <constructor-arg ref="upiPaymentService"/>-->
+<!--    </bean>-->
+
+
+<!--  What to do for prototype scoped beans -->
+<!--    <bean id="upiPaymentService" class="org.example.payment.UPIPaymentService"/>-->
+
+<!--    <bean id="cardPaymentService" class="org.example.payment.CardPaymentService"/>-->
+<!--      just referring to the PaymentService class which we need and bean should be created-->
+
+<!--    <bean id="orderService" class="org.example.OrderService">-->
+<!--        <constructor-arg ref="upiPaymentService"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="userService"-->
+<!--            class="org.example.UserService"-->
+<!--            scope="prototype">-->
+<!--    </bean>       -->
+
+
+<!--    we can implement collection via constructor -->
+<!--    <bean id="userService" class="org.example.UserService">-->
+<!--        <constructor-arg value="Mahesh"/>-->
+<!--   in XML, we can pass List, set, Map, and all collection data types -->
+<!--            <constructor-arg name="userNames">-->
+<!--                <list>-->
+<!--                    <value>Mahesh</value>-->
+<!--                    <value>Rohan</value>-->
+<!--                    <value>Kiran</value>-->
+<!--                </list>-->
+<!--            </constructor-arg>-->
+<!--    </bean>-->
 
 
 </beans>

@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");          //ClassPathXMLApplicationContext used for XML based configurations
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("AppConfig.xml");          //ClassPathXMLApplicationContext used for XML based configurations
 
         // get bean by type
 //        OrderService orderService = context.getBean(OrderService.class);      // this is one of way to get the bean
@@ -19,15 +19,21 @@ public class Main {
         // this will work even if we have multiple beans of same type, we just have to call them accordingly
 
         // passing both the parameters id and as well as the reflection of that class
-        OrderService orderService =
-                context.getBean("orderService", OrderService.class);
+//        OrderService orderService =
+//                context.getBean("orderService", OrderService.class);
 
 //        PaymentService paymentService =
 //                context.getBean("paymentService", PaymentService.class);
 
-        orderService.orderPlaced();
+        //orderService.orderPlaced();
         // this is best way to get bean
 
+        UserService user = context.getBean("userService", UserService.class);
 
+        //System.out.println(user.getUserNames());
+
+        //here if we don't call close() method then it won't gonna call to PreDestroy Phase
+        // And if it was a prototype scope it is not gonna call the cleanUp method as in prototype Spring does not manage bean's destruction
+        context.close();
     }
 }
