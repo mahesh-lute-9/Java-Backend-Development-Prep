@@ -12,4 +12,11 @@ public class AppConfig {
     public OrderService orderServiceBean(){
         return new OrderService();
     }
+
+    @Bean
+    public OrderService orderServiceBean2(){
+        return new OrderService();
+    }
+
+    //here it creates two beans of same type
 }
