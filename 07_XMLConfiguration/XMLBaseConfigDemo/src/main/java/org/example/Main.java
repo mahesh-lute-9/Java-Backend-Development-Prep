@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.payment.PaymentService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -21,8 +22,8 @@ public class Main {
         OrderService orderService =
                 context.getBean("orderService", OrderService.class);
 
-        PaymentService paymentService =
-                context.getBean("paymentService", PaymentService.class);
+//        PaymentService paymentService =
+//                context.getBean("paymentService", PaymentService.class);
 
         orderService.orderPlaced();
         // this is best way to get bean

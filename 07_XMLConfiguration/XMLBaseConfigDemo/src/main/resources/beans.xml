@@ -14,24 +14,49 @@
     <!--            name = "orderServiceBean, orderServiceBean2, orderServiceBean"-->
     <!--            class = "org.example.OrderService"/>-->
 
-    <!--    <bean id = "paymentService"  class = "org.example.PaymentService"/>-->
+    <!--    <bean id = "paymentService"  class = "org.example.payment.PaymentService"/>-->
 
     <!--    <bean id = "orderService2"  class = "org.example.OrderService"/>-->
 
-    <!-- constructor injection, passing values -->
+
+        <!-- constructor injection, passing values -->
 <!--    <bean id = "orderService" class = "org.example.OrderService">-->
 <!--        <constructor-arg ref="paymentService"/>-->
 <!--    </bean>-->
 
-    <bean id = "orderService" class = "org.example.OrderService">
-        <constructor-arg ref="paymentService"/>
-    </bean>
+<!--    <bean id = "orderService" class = "org.example.OrderService">-->
+<!--        <constructor-arg ref="paymentService"/>-->
+<!--    </bean>-->
 
-    <bean id = "paymentService" class = "org.example.PaymentService">
+<!--    <bean id = "paymentService" class = "org.example.payment.PaymentService">-->
 <!--        <constructor-arg index="1" value="3"/>      -->
 <!--        <constructor-arg index="0" value="UPI"/>    -->
-        <constructor-arg name="type" value="UPI"/>
-        <constructor-arg name="retryCount" value="3"/>
+<!--        <constructor-arg name="type" value="UPI"/>-->
+<!--        <constructor-arg name="retryCount" value="3"/>-->
+<!--    </bean>-->
+
+
+        <!-- setter injection    -->
+<!--    <bean id = "paymentService" class="org.example.payment.PaymentService">-->
+<!--        <constructor-arg name="type" value="UPI"/>-->
+<!--        <constructor-arg name="retryCount" value="3"/>-->
+<!--    </bean>-->
+
+<!--  here we don't need to add set it takes it automatically, and have to refer a variable  -->
+<!--    <bean id = "orderService" class="org.example.OrderService">-->
+<!--        <property name="paymentServiceBean" ref="paymentService"/>-->
+<!--    </bean>-->
+
+
+<!--  What if there are multiple beans of same type, THE SOLUTION  -->
+<!--    primary="true" -->
+    <bean id="upiPaymentService" class="org.example.payment.UPIPaymentService"/>
+
+    <bean id="cardPaymentService" class="org.example.payment.CardPaymentService"/>
+<!--  just referring to the PaymentService class which we need and bean should be created -->
+    <bean id="orderService" class="org.example.OrderService">
+        <constructor-arg ref="upiPaymentService"/>
     </bean>
+
 
 </beans>
