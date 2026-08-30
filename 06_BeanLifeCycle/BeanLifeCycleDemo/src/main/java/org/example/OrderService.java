@@ -3,31 +3,35 @@ package org.example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("orderBean") //--> we use this to change the bean name
+@Component("orderBean") // Changes the default bean name from "orderService" to "orderBean"
 public class OrderService {
 
     @Autowired
     private PaymentService paymentService;
 
-//    public OrderService(PaymentService paymentService){
+//    // Constructor injection
+//    public OrderService(PaymentService paymentService) {
 //        this.paymentService = paymentService;
 //    }
 
-    public void placeOrder(){
+    public void placeOrder() {
         System.out.println("Order Placed");
     }
 }
 
-
-// Bean Definition
 /*
-    beanName : orderService --> orderBean(changed)
-    beanClass : OrderService
-    scope : singleton
-    lazy : false
-    dependency : paymentService
+ * Bean Definition:
+ *
+ * beanName   : orderBean       // Custom bean name
+ * beanClass  : OrderService
+ * scope      : singleton
+ * lazy       : false
+ * dependency : paymentService
+ *
+ * Spring first creates Bean Definitions for the beans.
+ * These definitions contain metadata about how each bean should be created
+ * and managed.
+ *
+ * Spring is dependency-aware and creates beans according to their
+ * dependency relationships.
  */
-
-// Spring creates all the Bean Definitions firstly
-// So that it can know which objects have lazy initialization, and manage bean properly
-// Spring creates bean by the dependency tree, it is dependency aware

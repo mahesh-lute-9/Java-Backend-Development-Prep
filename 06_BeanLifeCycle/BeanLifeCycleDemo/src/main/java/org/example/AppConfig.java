@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 public class AppConfig {
 
-    public void demo(){
-        System.out.println("Demo");
-    }
+//    @Bean(initMethod = "start", destroyMethod = "stop")
+//    public CartService getCartBean(){
+//        return new CartService();
+//    }
 }
