@@ -5,11 +5,15 @@ package org.example;
 //@Component
 public class OrderService {
 
-    public OrderService(){
-        System.out.println("Order Service created");
+    private PaymentService paymentService;
+
+    public OrderService(PaymentService paymentService){
+        this.paymentService = paymentService;
     }
 
     public void orderPlaced(){
+        paymentService.pay();
+
         System.out.println("Order Placed");
     }
 }

@@ -19,12 +19,11 @@ public class Main {
 
         // passing both the parameters id and as well as the reflection of that class
         OrderService orderService =
-                context.getBean("orderServiceBean2", OrderService.class);
+                context.getBean("orderService", OrderService.class);
 
         PaymentService paymentService =
                 context.getBean("paymentService", PaymentService.class);
 
-        paymentService.pay();
         orderService.orderPlaced();
         // this is best way to get bean
 

@@ -7,16 +7,31 @@
     <!-- bean definitions here -->
     <!-- here the id name should be the name of class in camelCase notation, it is convention not necessary-->
     <!-- and we must give the id if we don't then it can't find the bean when we try to access it by id/name-->
-    <!--    in bean the name parameter is used to name the bean, and it is called as aliases, we can write multiple names of bean and call it by one of them-->
+    <!-- in bean the name parameter is used to name the bean, and it is called as aliases, we can write multiple names of bean and call it by one of them-->
+    <!-- in XML based config we can't inject dependency through field injection, we just do it via constructor or setter methods  -->
 
-    <bean id = "orderService"
-            name = "orderServiceBean, orderServiceBean2, orderServiceBean"
-            class = "org.example.OrderService"/>
+    <!--    <bean id = "orderService"-->
+    <!--            name = "orderServiceBean, orderServiceBean2, orderServiceBean"-->
+    <!--            class = "org.example.OrderService"/>-->
 
-    <bean id = "paymentService"  class = "org.example.PaymentService"/>
+    <!--    <bean id = "paymentService"  class = "org.example.PaymentService"/>-->
 
     <!--    <bean id = "orderService2"  class = "org.example.OrderService"/>-->
 
+    <!-- constructor injection, passing values -->
+<!--    <bean id = "orderService" class = "org.example.OrderService">-->
+<!--        <constructor-arg ref="paymentService"/>-->
+<!--    </bean>-->
 
+    <bean id = "orderService" class = "org.example.OrderService">
+        <constructor-arg ref="paymentService"/>
+    </bean>
+
+    <bean id = "paymentService" class = "org.example.PaymentService">
+<!--        <constructor-arg index="1" value="3"/>      -->
+<!--        <constructor-arg index="0" value="UPI"/>    -->
+        <constructor-arg name="type" value="UPI"/>
+        <constructor-arg name="retryCount" value="3"/>
+    </bean>
 
 </beans>
