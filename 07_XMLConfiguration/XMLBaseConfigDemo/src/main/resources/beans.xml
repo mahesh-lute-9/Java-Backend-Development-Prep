@@ -1,92 +1,265 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-    <!-- bean definitions here -->
-    <!-- here the id name should be the name of class in camelCase notation, it is convention not necessary-->
-    <!-- and we must give the id if we don't then it can't find the bean when we try to access it by id/name-->
-    <!-- in bean the name parameter is used to name the bean, and it is called as aliases, we can write multiple names of bean and call it by one of them-->
-    <!-- in XML based config we can't inject dependency through field injection, we just do it via constructor or setter methods  -->
-
-    <!--    <bean id = "orderService"-->
-    <!--            name = "orderServiceBean, orderServiceBean2, orderServiceBean"-->
-    <!--            class = "org.example.OrderService"/>-->
-
-    <!--    <bean id = "paymentService"  class = "org.example.payment.PaymentService"/>-->
-
-    <!--    <bean id = "orderService2"  class = "org.example.OrderService"/>-->
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-        <!-- constructor injection, passing values -->
-<!--    <bean id = "orderService" class = "org.example.OrderService">-->
-<!--        <constructor-arg ref="paymentService"/>-->
-<!--    </bean>-->
+    <!-- =========================================================
+         BASIC BEAN CONFIGURATION
+         ========================================================= -->
 
-<!--    <bean id = "orderService" class = "org.example.OrderService">-->
-<!--        <constructor-arg ref="paymentService"/>-->
-<!--    </bean>-->
+    <!--
+        <bean> is used to tell Spring:
 
-<!--    <bean id = "paymentService" class = "org.example.payment.PaymentService">-->
-<!--        <constructor-arg index="1" value="3"/>      -->
-<!--        <constructor-arg index="0" value="UPI"/>    -->
-<!--        <constructor-arg name="type" value="UPI"/>-->
-<!--        <constructor-arg name="retryCount" value="3"/>-->
-<!--    </bean>-->
+        "Create and manage an object of this class."
 
+        id:
+        - Unique name of the bean.
+        - We can use this id to get the bean from Spring.
 
-        <!-- setter injection    -->
-<!--    <bean id = "paymentService" class="org.example.payment.PaymentService">-->
-<!--        <constructor-arg name="type" value="UPI"/>-->
-<!--        <constructor-arg name="retryCount" value="3"/>-->
-<!--    </bean>-->
+        The camelCase naming convention is commonly used for bean ids,
+        but it is NOT mandatory.
 
-<!--  here we don't need to add set it takes it automatically, and have to refer a variable  -->
-<!--    <bean id = "orderService" class="org.example.OrderService">-->
-<!--        <property name="paymentServiceBean" ref="paymentService"/>-->
-<!--    </bean>-->
+        Example:
+            Class name → OrderService
+            Bean id    → orderService
+    -->
 
+    <!--
+        name:
+        - Used to give aliases to a bean.
+        - Multiple names can refer to the same bean.
 
-<!--  What if there are multiple beans of same type, THE SOLUTION  -->
-<!--    primary="true" -->
-<!--    <bean id="upiPaymentService" class="org.example.payment.UPIPaymentService"/>-->
+        Example:
+            name="orderServiceBean, orderServiceBean2"
 
-<!--    <bean id="cardPaymentService" class="org.example.payment.CardPaymentService"/>-->
-<!--  just referring to the PaymentService class which we need and bean should be created -->
-<!--    <bean id="orderService" class="org.example.OrderService">-->
-<!--        <constructor-arg ref="upiPaymentService"/>-->
-<!--    </bean>-->
+        Both names can be used to access the same bean.
 
+        id and name are different:
+        - id   → primary bean identifier
+        - name → aliases for the bean
+    -->
 
-<!--  What to do for prototype scoped beans -->
-<!--    <bean id="upiPaymentService" class="org.example.payment.UPIPaymentService"/>-->
-
-<!--    <bean id="cardPaymentService" class="org.example.payment.CardPaymentService"/>-->
-<!--      just referring to the PaymentService class which we need and bean should be created-->
-
-<!--    <bean id="orderService" class="org.example.OrderService">-->
-<!--        <constructor-arg ref="upiPaymentService"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="userService"-->
-<!--            class="org.example.UserService"-->
-<!--            scope="prototype">-->
-<!--    </bean>       -->
+    <!--
+        <bean id="orderService"
+              name="orderServiceBean,orderServiceBean2"
+              class="org.example.OrderService"/>
+    -->
 
 
-<!--    we can implement collection via constructor -->
-<!--    <bean id="userService" class="org.example.UserService">-->
-<!--        <constructor-arg value="Mahesh"/>-->
-<!--   in XML, we can pass List, set, Map, and all collection data types -->
-<!--            <constructor-arg name="userNames">-->
-<!--                <list>-->
-<!--                    <value>Mahesh</value>-->
-<!--                    <value>Rohan</value>-->
-<!--                    <value>Kiran</value>-->
-<!--                </list>-->
-<!--            </constructor-arg>-->
-<!--    </bean>-->
+    <!--
+        The class attribute tells Spring which class
+        should be instantiated.
+
+        IMPORTANT:
+        PaymentService is an interface, so we cannot create
+        a bean directly from it.
+
+        We need to use a concrete implementation such as
+        UPIPaymentService or CardPaymentService.
+    -->
+
+    <!--
+        <bean id="paymentService"
+              class="org.example.payment.PaymentService"/>
+    -->
+
+
+    <!--
+        <bean id="orderService2"
+              class="org.example.OrderService"/>
+    -->
+
+
+
+    <!-- =========================================================
+         CONSTRUCTOR INJECTION
+         ========================================================= -->
+
+    <!--
+        Constructor injection means:
+
+        Spring creates the dependency and passes it
+        through the constructor.
+
+        Our OrderService constructor is:
+
+            public OrderService(PaymentService paymentService)
+
+        So Spring needs to provide a PaymentService bean.
+    -->
+
+    <!--
+        <bean id="orderService"
+              class="org.example.OrderService">
+
+            <constructor-arg ref="paymentService"/>
+
+        </bean>
+    -->
+
+
+    <!-- =========================================================
+         CONSTRUCTOR INJECTION WITH VALUES
+         ========================================================= -->
+
+    <!--
+        Constructor arguments can also be normal values,
+        such as String, int, etc.
+
+        index:
+        - Refers to the position of the constructor parameter.
+        - index="0" → first parameter
+        - index="1" → second parameter
+
+        name:
+        - Refers to the constructor parameter by its name.
+
+        In practice, using name is often easier to understand.
+    -->
+
+    <!--
+        <bean id="paymentService"
+              class="org.example.payment.SomePaymentService">
+
+            <constructor-arg index="0" value="UPI"/>
+            <constructor-arg index="1" value="3"/>
+
+            OR
+
+            <constructor-arg name="type" value="UPI"/>
+            <constructor-arg name="retryCount" value="3"/>
+
+        </bean>
+    -->
+
+
+
+    <!-- =========================================================
+         SETTER INJECTION
+         ========================================================= -->
+
+    <!--
+        Setter injection means Spring creates the object first
+        and then calls its setter method to inject the dependency.
+
+        Example setter:
+
+            public void setPaymentServiceBean(
+                    PaymentService paymentService) {
+                this.paymentService = paymentService;
+            }
+
+        In XML, we use <property> to call the setter.
+
+        name="paymentServiceBean"
+        → Spring looks for:
+
+            setPaymentServiceBean(...)
+    -->
+
+    <!--
+        <bean id="orderService"
+              class="org.example.OrderService">
+
+            <property name="paymentServiceBean"
+                      ref="paymentService"/>
+
+        </bean>
+    -->
+
+
+
+    <!-- =========================================================
+         MULTIPLE BEANS OF THE SAME TYPE
+         ========================================================= -->
+
+    <!--
+        Here we have two different beans that implement
+        the same PaymentService interface.
+    -->
+
+    <!--
+        <bean id="upiPaymentService"
+              class="org.example.payment.UPIPaymentService"/>
+
+        <bean id="cardPaymentService"
+              class="org.example.payment.CardPaymentService"/>
+    -->
+
+
+    <!--
+        We can explicitly tell Spring which bean to inject
+        using its id.
+
+        Here OrderService receives the UPI payment service.
+    -->
+
+    <!--
+        <bean id="orderService"
+              class="org.example.OrderService">
+
+            <constructor-arg ref="upiPaymentService"/>
+
+        </bean>
+    -->
+
+
+
+    <!-- =========================================================
+         PROTOTYPE SCOPE
+         ========================================================= -->
+
+    <!--
+        By default, Spring beans are singleton scoped.
+
+        prototype means:
+        Every time we request this bean from Spring,
+        Spring creates a NEW object.
+    -->
+
+    <!--
+        <bean id="userService"
+              class="org.example.UserService"
+              scope="prototype"/>
+    -->
+
+
+
+    <!-- =========================================================
+         COLLECTION INJECTION
+         ========================================================= -->
+
+    <!--
+        Spring can also inject collections such as:
+
+            List
+            Set
+            Map
+
+        Here we are passing a List<String>
+        to the UserService constructor.
+    -->
+
+    <!--
+        <bean id="userService"
+              class="org.example.UserService">
+
+            <constructor-arg name="userNames">
+
+                <list>
+                    <value>Mahesh</value>
+                    <value>Rohan</value>
+                    <value>Kiran</value>
+                </list>
+
+            </constructor-arg>
+
+        </bean>
+    -->
 
 
 </beans>

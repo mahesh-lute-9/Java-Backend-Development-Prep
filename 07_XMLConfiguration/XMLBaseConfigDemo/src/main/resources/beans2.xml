@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<!--    Learning how we can call PostConstruct and PreDestroy methods -->
+    <!--
+        Defining UserService as a Spring bean.
+
+        init-method  → called after the bean is created
+        destroy-method → called before the bean is destroyed
+    -->
     <bean id="userService"
-            class = "org.example.UserService"
-            init-method="init"
-            destroy-method="cleanUp"
-            scope="prototype"
-    />
+          class="org.example.UserService"
+          init-method="init"
+          destroy-method="cleanUp"
+          scope="prototype"/>
 
 </beans>
