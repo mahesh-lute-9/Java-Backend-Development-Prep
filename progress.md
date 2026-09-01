@@ -16,7 +16,9 @@ A running, day-by-day record of my Java Backend Development / Spring Boot learni
 | 4 | Spring Core — IoC & DI | `04_SpringCoreDemo` | ✅ |
 | 5 | Bean Scope | `05_CircularDependency` | ✅ |
 | 6 | Circular Dependency & Bean Initialization | `05_CircularDependency` | ✅ |
-| 7 | *Next topic* | — | ⏳ |
+| 7 | Spring Bean Lifecycle | `06_BeanLifeCycle` | ✅ |
+| 8 | Spring XML-Based Configuration | `07_XMLConfiguration` | ✅ |
+| 9 | *Next topic* | — | ⏳ |
 
 ---
 
@@ -55,6 +57,20 @@ A running, day-by-day record of my Java Backend Development / Spring Boot learni
 - How Spring detects and resolves circular dependencies
 - Bean initialization order, `@PostConstruct`, `@Lazy` as a workaround
 - **Folder:** `05_CircularDependency`
+- **Status:** ✅ Done
+
+### Spring Bean Lifecycle
+- Full bean lifecycle: instantiation → dependency injection → initialization → destruction
+- `InitializingBean` / `DisposableBean` interfaces vs. `@PostConstruct` / `@PreDestroy`
+- Where `BeanPostProcessor` fits in
+- **Folder:** `06_BeanLifeCycle`
+- **Status:** ✅ Done
+
+### Spring XML-Based Configuration
+- Defining beans in XML instead of annotations (`<bean>`, `<property>`, `<constructor-arg>`)
+- Comparing XML config vs. annotation-based config vs. Java config
+- When XML config still shows up in legacy/enterprise codebases
+- **Folder:** `07_XMLConfiguration`
 - **Status:** ✅ Done
 
 ### *Next up*

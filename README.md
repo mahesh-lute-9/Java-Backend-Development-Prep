@@ -22,6 +22,8 @@ This repo holds hands-on code from every topic I cover, alongside my own intervi
 | `03_CoreDemo` | Core Java/Spring foundational concepts |
 | `04_SpringCoreDemo` | Spring Core — IoC container, Dependency Injection |
 | `05_CircularDependency` | Circular dependency, bean scope, bean initialization |
+| `06_BeanLifeCycle` | Spring bean lifecycle — init/destroy callbacks, `BeanPostProcessor` |
+| `07_XMLConfiguration` | Spring XML-based configuration |
 
 Each folder is a self-contained runnable project for that concept.
 
