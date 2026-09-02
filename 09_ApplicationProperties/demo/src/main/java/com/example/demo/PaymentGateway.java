@@ -30,6 +30,14 @@ public class PaymentGateway {
     }
 
 
+    public void print(){
+        System.out.println(getRetryCount());
+        System.out.println(getType());
+        System.out.println(isEnabled());
+        System.out.println(getTimeout());
+    }
+
+
 //    @Value("${paymentGateway.type:Razorpay}")
 //    private String type;
 //
