@@ -12,7 +12,7 @@ public class PaymentGateway {
         this.paymentProperties = paymentProperties;
     }
 
-
+    // only getters good design
     public String getType() {
         return paymentProperties.getType();
     }

@@ -18,6 +18,8 @@ public class DemoApplication {
 
 		System.out.println(paymentGateway.getRetryCount());
 		System.out.println(paymentGateway.getType());
+		System.out.println(paymentGateway.isEnabled());
+		System.out.println(paymentGateway.getTimeout());
 	}
 
 }
