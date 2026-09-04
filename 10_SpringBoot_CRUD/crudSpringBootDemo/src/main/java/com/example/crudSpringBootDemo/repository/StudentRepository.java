@@ -2,24 +2,41 @@ package com.example.crudSpringBootDemo.repository;
 
 import com.example.crudSpringBootDemo.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-//@Component
-@Repository
-public interface StudentRepository extends JpaRepository<Student, Long> {  //JpaRepository? CrudRepository?
+@Repository     // Marks this interface as a repository component used for database operations.
+//@Component    // Generic Spring bean annotation; @Repository is more specific and preferred here.
 
-    // here how does it possible that even if we don't override none of it's methods it doesn't give any error?
+// Why did we make it an interface?
+// Spring Data JPA creates the implementation of this interface automatically at runtime.
+// We only define the repository contract; we don't need to write the implementation ourselves.
+public interface StudentRepository extends JpaRepository<Student, Long> {
+
+    // Why don't we override JpaRepository methods?
+    // JpaRepository already provides predefined CRUD methods.
+    // Spring Data JPA provides their implementation automatically through a proxy object.
 }
 
 
-// SQL query --> Methods(Spring JPA) -- Jakarta Persistent API
-/*
-    - create --> save() --> Insert into student();
-    - readAll --> findAll() --> select * from student();
-    - readOne --> find() --> select * from student where .. ;
-    - update --> save(), existsById()
-    - delete --> deleteById()
+// JpaRepository<Student, Long>
+// Student -> Entity type this repository works with.
+// Long    -> Data type of the entity's primary key (Student.id).
 
-    we use all these predefined methods so that we should not have to write sql queries for it
+
+// JpaRepository vs CrudRepository:
+// CrudRepository provides basic CRUD operations.
+// JpaRepository extends CrudRepository and provides additional JPA-specific
+// features such as pagination, sorting, and batch-related operations.
+
+
+// SQL query --> Spring Data JPA method --> JPA/Hibernate --> Database
+/*
+    Create   --> save()
+    Read All --> findAll()
+    Read One --> findById()
+    Update   --> save()
+    Delete   --> deleteById()
+
+    We use predefined methods so we don't have to write common SQL queries manually.
  */

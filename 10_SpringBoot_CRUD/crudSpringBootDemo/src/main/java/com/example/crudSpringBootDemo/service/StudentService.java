@@ -2,60 +2,58 @@ package com.example.crudSpringBootDemo.service;
 
 import com.example.crudSpringBootDemo.entity.Student;
 import com.example.crudSpringBootDemo.repository.StudentRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-// till, now we're doing everything using the @Component & telling Spring that you should manage this class as bean
-//@Component
 @Service
+// Marks this class as a Spring-managed service bean.
+// The service layer contains business logic and sits between Controller and Repository.
 public class StudentService {
-
-    // we're doing it all in One class
-    // 1. End point listen (/api/students with diff methods)
-    // 2. Business logic
-    // 3. Interact with DB to store
-    // 4. Response back to client(postman)
-    // from now on we'll be devide these responsibilities as Controller-Service-Repository layers, it is architecture. WHY & HOW
-    // POJO class, what it does? entity class
 
     private StudentRepository studentRepository;
 
+    // Constructor Injection: Spring provides the StudentRepository bean automatically.
     public StudentService(StudentRepository studentRepository){
         this.studentRepository = studentRepository;
     }
 
     public Student createStudent(Student studentRequest){
-        // business logic
-        // store to db
+
+        // Repository handles the actual database operation.
         Student studentResponse = studentRepository.save(studentRequest);
 
         return studentResponse;
     }
 
     public Student getStudent(Long id){
-        Optional<Student> studentResponse = studentRepository.findById(id);     //findById returns Optionals
+
+        // findById() returns Optional because the requested record may not exist.
+        Optional<Student> studentResponse = studentRepository.findById(id);
 
         if(studentResponse.isPresent()){
             return studentResponse.get();
         }
+
         return null;
     }
 
     public List<Student> getAllStudent(){
-        List<Student> studentList = studentRepository.findAll();
-        return studentList;
+
+        return studentRepository.findAll();
     }
 
     public Student updateStudent(Long id, Student studentRequest){
-        Optional<Student> existingStudent = studentRepository.findById(id);     //findById returns Optionals
+
+        // First check whether the student exists.
+        Optional<Student> existingStudent = studentRepository.findById(id);
 
         if(existingStudent.isEmpty()){
             return null;
         }
 
+        // Get the existing entity and update its fields.
         Student studentToSave = existingStudent.get();
 
         studentToSave.setName(studentRequest.getName());
@@ -64,10 +62,13 @@ public class StudentService {
         studentToSave.setAge(studentRequest.getAge());
         studentToSave.setSubject(studentRequest.getSubject());
 
+        // save() updates the existing record because the entity already has its ID.
         return studentRepository.save(studentToSave);
     }
 
     public boolean deleteStudent(Long id){
+
+        // Check whether the record exists before attempting to delete it.
         Boolean isStudent = studentRepository.existsById(id);
 
         if(!isStudent) return false;

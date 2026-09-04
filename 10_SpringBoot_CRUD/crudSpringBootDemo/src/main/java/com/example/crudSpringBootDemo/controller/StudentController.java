@@ -10,101 +10,110 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@Component  // it is generic annotation to tell Spring that manage this class as bean
-@RestController     // What is it?
-@RequestMapping("/api/students")        // maps to endpoint. Explain
+//@Component
+// Generic annotation used to register a class as a Spring Bean.
+// @RestController is more specific for REST API controllers.
+
+@RestController
+// Marks this class as a REST controller.
+// It combines @Controller + @ResponseBody.
+// @ResponseBody means the returned object is written directly to the HTTP response,
+// usually as JSON using Jackson.
+
+@RequestMapping("/api/students")
+// Defines the common/base URL for all endpoints in this controller.
+// Example: @GetMapping("/{id}") becomes /api/students/{id}.
 public class StudentController {
 
     private StudentService studentService;
 
+    // Constructor Injection: Spring automatically provides the StudentService bean.
+    // This is preferred over manually creating the object using new.
     public StudentController(StudentService studentService){
         this.studentService = studentService;
     }
 
-    // create student
-    @PostMapping    //("/create") we add like this to make the endpoint valid is we want to be specific
-    public ResponseEntity<Student> createStudent(@RequestBody Student student){        // @RequestBody? What, WHY, HOW? jackson library
+    // Create student
+    @PostMapping
+    // Maps HTTP POST /api/students to this method.
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
+        // @RequestBody tells Spring to take the JSON request body
+        // and convert it into a Student object.
+        // Jackson performs the JSON <-> Java object conversion.
 
         Student createdStudent = studentService.createStudent(student);
 
-        //return ResponseEntity.ok(createdStudent);
-        //return ResponseEntity.status(201).body(createdStudent);
-        return  ResponseEntity
+        // 201 CREATED indicates that a new resource was successfully created.
+        // ResponseEntity allows us to control both the response body and HTTP status code.
+        return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(createdStudent);
-        //return newly created student entity
-
-        //if we want to return status code only then we've to change the return type
     }
 
-    // read student by id, single
+
+    // Read one student by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable Long id){       // @PathVarible? & query parameter
-//        Student studentResponse = studentService.getStudent(id);
-//
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(studentResponse);
+    // Example: GET /api/students/1
+    public ResponseEntity<Student> getStudent(@PathVariable Long id){
+        // @PathVariable extracts the {id} value from the URL
+        // and passes it to the method as a Java variable.
 
         Student studentResponse = studentService.getStudent(id);
 
         if(studentResponse == null){
-            return  ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();    // 404 NOT FOUND
         }
-        return ResponseEntity.ok(studentResponse);
+
+        return ResponseEntity.ok(studentResponse);      // 200 OK
     }
 
-    // read students all
+
+    // Read all students
     @GetMapping
+    // Maps GET /api/students
     public ResponseEntity<List<Student>> getAllStudents(){
+
         List<Student> studentsList = studentService.getAllStudent();
 
         if(studentsList.isEmpty()){
             return ResponseEntity.notFound().build();
         }
+
         return ResponseEntity.ok(studentsList);
     }
 
-    // update student
-    @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id,
-                                                    @RequestBody Student studentRequest){       // @PathVarible? & query parameter
 
-        Student studentResponse = studentService.updateStudent(id,studentRequest);
+    // Update student
+    @PutMapping("/{id}")
+    // Example: PUT /api/students/1
+    public ResponseEntity<Student> updateStudent(
+            @PathVariable Long id,
+            @RequestBody Student studentRequest){
+
+        // id comes from the URL.
+        // studentRequest comes from the JSON request body.
+
+        Student studentResponse = studentService.updateStudent(id, studentRequest);
 
         if(studentResponse == null){
-            return  ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
+
         return ResponseEntity.ok(studentResponse);
     }
 
 
-    // delete student
-    @DeleteMapping("{id}")
+    // Delete student
+    @DeleteMapping("/{id}")
+    // Example: DELETE /api/students/1
     public ResponseEntity<String> deleteStudent(@PathVariable Long id){
+
         Boolean isDeleted = studentService.deleteStudent(id);
 
         if(!isDeleted){
             return ResponseEntity.notFound().build();
         }
+
         return ResponseEntity.ok("Record Deleted");
     }
 }
-
-/*
-    this is better as convention
-    create --> POST --> /api/students
-    read one record --> GET --> /api/students/{id}
-    read all --> GET --> /api/students
-    update --> PUT --> /api/students/{id}
-    delete --> DELETE --> /api/students/{id}
- */
-
-/*
-    this is better to know what it does actually
-    create --> POST --> /api/students/create
-    read one record --> GET --> /api/students/get/{id}
-    read all --> GET --> /api/students/getAll
-    update --> PUT --> /api/students/update/{id}
-    delete --> DELETE --> /api/students//delete/{id}
- */

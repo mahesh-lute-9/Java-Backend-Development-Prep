@@ -2,10 +2,10 @@ package com.example.crudSpringBootDemo.entity;
 
 import jakarta.persistence.*;
 
-@Entity     // Explain what it
+@Entity     // Marks this class as a JPA entity; Hibernate maps it to a database table.
 public class Student {
 
-    @Id
+    @Id     // Marks this field as the primary key of the Student table.
     //@GeneratedValue(strategy = GenerationType.SEQUENCE)
     //@Column(nullable = false)
     private Long id;
@@ -15,6 +15,8 @@ public class Student {
     private int age;
     private int rollNo;
     private String subject;
+
+    // Getters and setters are used by JPA/Hibernate to access and modify entity fields.
 
     public Long getId() {
         return id;
@@ -65,4 +67,4 @@ public class Student {
     }
 }
 
-// ORM- Object relational mapping
+// ORM (Object-Relational Mapping) maps Java objects/classes to relational database tables.
