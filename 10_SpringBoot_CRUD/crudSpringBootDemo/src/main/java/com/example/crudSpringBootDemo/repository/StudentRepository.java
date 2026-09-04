@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {  //JpaRepository? CrudRepository?
 
-    // here how does it possible it does not give error even if we don't override none of it's methods
+    // here how does it possible that even if we don't override none of it's methods it doesn't give any error?
 }
 
 

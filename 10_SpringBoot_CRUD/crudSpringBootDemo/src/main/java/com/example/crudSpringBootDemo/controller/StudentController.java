@@ -66,12 +66,30 @@ public class StudentController {
     }
 
     // update student
+    @PutMapping("/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id,
+                                                    @RequestBody Student studentRequest){       // @PathVarible? & query parameter
+
+        Student studentResponse = studentService.updateStudent(id,studentRequest);
+
+        if(studentResponse == null){
+            return  ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(studentResponse);
+    }
+
 
     // delete student
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteStudent(@PathVariable Long id){
+        Boolean isDeleted = studentService.deleteStudent(id);
 
+        if(!isDeleted){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok("Record Deleted");
+    }
 }
-
-
 
 /*
     this is better as convention
