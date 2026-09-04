@@ -5,6 +5,9 @@ import com.example.crudSpringBootDemo.repository.StudentRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 // till, now we're doing everything using the @Component & telling Spring that you should manage this class as bean
 //@Component
 @Service
@@ -31,4 +34,20 @@ public class StudentService {
 
         return studentResponse;
     }
+
+    public Student getStudent(Long id){
+        Optional<Student> studentResponse = studentRepository.findById(id);     //findById returns Optionals
+
+        if(studentResponse.isPresent()){
+            return studentResponse.get();
+        }
+        return null;
+    }
+
+    public List<Student> getAllStudent(){
+        List<Student> studentList = studentRepository.findAll();
+        return studentList;
+    }
+
+
 }

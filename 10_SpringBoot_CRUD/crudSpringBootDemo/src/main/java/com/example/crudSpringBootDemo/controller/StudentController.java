@@ -6,10 +6,9 @@ import com.example.crudSpringBootDemo.entity.Student;
 import com.example.crudSpringBootDemo.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 //@Component  // it is generic annotation to tell Spring that manage this class as bean
 @RestController     // What is it?
@@ -38,7 +37,33 @@ public class StudentController {
         //if we want to return status code only then we've to change the return type
     }
 
-    // read student
+    // read student by id, single
+    @GetMapping("/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable Long id){       // @PathVarible? & query parameter
+//        Student studentResponse = studentService.getStudent(id);
+//
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(studentResponse);
+
+        Student studentResponse = studentService.getStudent(id);
+
+        if(studentResponse == null){
+            return  ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(studentResponse);
+    }
+
+    // read students all
+    @GetMapping
+    public ResponseEntity<List<Student>> getAllStudents(){
+        List<Student> studentsList = studentService.getAllStudent();
+
+        if(studentsList.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(studentsList);
+    }
 
     // update student
 
