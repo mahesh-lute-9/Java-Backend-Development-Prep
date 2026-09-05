@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository     // Marks this interface as a repository component used for database operations.
 //@Component    // Generic Spring bean annotation; @Repository is more specific and preferred here.
 
@@ -16,6 +19,10 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     // Why don't we override JpaRepository methods?
     // JpaRepository already provides predefined CRUD methods.
     // Spring Data JPA provides their implementation automatically through a proxy object.
+
+    // declaring our own methods so that Spring JPA will provide implementation at runtime it's own
+    Optional<Student> findByIdAndDeletedFalse(Long id);
+    List<Student> findByDeletedIsFalse();
 }
 
 

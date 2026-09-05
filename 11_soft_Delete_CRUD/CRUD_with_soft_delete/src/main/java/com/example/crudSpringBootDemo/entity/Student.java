@@ -6,7 +6,12 @@ import jakarta.persistence.*;
 public class Student {
 
     @Id     // Marks this field as the primary key of the Student table.
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    /*
+    ⦁	We don’t set id manually instead we use auto incremental id, where we use @GeneratedType.
+    If we don’t we and give  manually id’s there would be scenario when two id matched and latest one
+    override th last one so
+     */
     //@Column(nullable = false)
     private Long id;
 
@@ -15,6 +20,7 @@ public class Student {
     private int age;
     private int rollNo;
     private String subject;
+    private Boolean deleted;
 
     // Getters and setters are used by JPA/Hibernate to access and modify entity fields.
 
@@ -64,6 +70,14 @@ public class Student {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 }
 
