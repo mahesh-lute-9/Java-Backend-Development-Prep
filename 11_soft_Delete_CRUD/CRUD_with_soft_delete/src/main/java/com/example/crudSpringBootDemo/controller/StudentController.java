@@ -33,6 +33,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+
     // Create student
     @PostMapping
     // Maps HTTP POST /api/students to this method.
@@ -53,14 +54,19 @@ public class StudentController {
 
     // Read one student by ID
     @GetMapping
-    // Example: GET /api/students/1
-    public ResponseEntity<Student> getStudent(@RequestParam Long id){   // now we'll be using @RequestParam
-        //	@PathVariable and @RequestParam these are the types endpoints where it attached with the requests,& methods.
-        // here Request parameter and variable name should be same
-        //	@RequestParam is used for multiple parameters & PathVariable used when there is just one variable as parameter
-
-        // @PathVariable extracts the {id} value from the URL
-        // and passes it to the method as a Java variable.
+    // Example: GET /api/students?id=1
+    public ResponseEntity<Student> getStudent(@RequestParam Long id){
+        // @RequestParam extracts a value from the query parameter of the URL.
+        //
+        // Example:
+        // GET /api/students?id=1
+        //
+        // Here, "id" from the request is passed to the method as a Long variable.
+        //
+        // @PathVariable is different:
+        // GET /api/students/1
+        // In that case, we would use @GetMapping("/{id}")
+        // and @PathVariable Long id.
 
         Student studentResponse = studentService.getStudent(id);
 
@@ -89,12 +95,14 @@ public class StudentController {
 
     // Update student
     @PutMapping
-    // Example: PUT /api/students/1
+    // Example: PUT /api/students?id=1
     public ResponseEntity<Student> updateStudent(
             @RequestParam Long id,
             @RequestBody Student studentRequest){
 
-        // id comes from the URL.
+        // id comes from the request parameter.
+        // Example: PUT /api/students?id=1
+        //
         // studentRequest comes from the JSON request body.
 
         Student studentResponse = studentService.updateStudent(id, studentRequest);
@@ -107,9 +115,9 @@ public class StudentController {
     }
 
 
-    // Delete student
+    // Hard Delete student
     @DeleteMapping
-    // Example: DELETE /api/students/1
+    // Example: DELETE /api/students?id=1
     public ResponseEntity<String> deleteStudent(@RequestParam Long id){
 
         Boolean isDeleted = studentService.deleteStudent(id);
@@ -122,15 +130,28 @@ public class StudentController {
     }
 
 
-    // soft-delete student
+    // Soft Delete student
     @PatchMapping
-    // Example: PATCH /api/students/{id}
+    // Example: PATCH /api/students?id=1
+    //
+    // PATCH is used here because we are partially modifying the existing
+    // student record instead of completely removing it from the database.
+    //
+    // In Soft Delete, the actual record is NOT removed.
+    // Instead, the "deleted" field of the student is changed to true.
     public ResponseEntity<String> softDeleteStudent(@RequestParam Long id){
+
+        // Passes the student ID to the service layer.
+        // The service layer contains the actual Soft Delete business logic.
         Boolean isDeleted = studentService.deleteStudentSoftly(id);
 
+        // If no matching active student is found, return 404 NOT FOUND.
         if(!isDeleted){
             return ResponseEntity.notFound().build();
         }
-        return  ResponseEntity.ok("Record deleted(Softly)");
+
+        // The record still exists in the database,
+        // but it is now marked as deleted.
+        return ResponseEntity.ok("Record deleted(Softly)");
     }
 }

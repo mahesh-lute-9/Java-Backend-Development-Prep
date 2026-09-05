@@ -8,10 +8,21 @@ public class Student {
     @Id     // Marks this field as the primary key of the Student table.
     @GeneratedValue(strategy = GenerationType.SEQUENCE) // use SEQUENCE or IDENTITY
     /*
-    ⦁	We don’t set id manually instead we use auto incremental id, where we use @GeneratedType.
-    If we don’t we and give  manually id’s there would be scenario when two id matched and latest one
-    override th last one so
-     */
+        We don't set the id manually. Instead, we use @GeneratedValue
+        so that the database/JPA can generate unique IDs automatically.
+
+        If we manually assign IDs, there is a possibility of accidentally
+        using an existing ID, which can cause conflicts with the primary key.
+
+        GenerationType.SEQUENCE:
+        Uses a database sequence to generate unique ID values.
+
+        GenerationType.IDENTITY:
+        Uses the database's identity/auto-increment mechanism.
+
+        The exact strategy depends on the database being used.
+        Here, we are using PostgreSQL.
+    */
     //@Column(nullable = false)
     private Long id;
 
@@ -20,7 +31,21 @@ public class Student {
     private int age;
     private int rollNo;
     private String subject;
+
+    /*
+        Soft Delete:
+        Instead of physically removing a student record from the database,
+        we maintain a flag to indicate whether the record has been deleted.
+
+        deleted = false -> Student is active.
+        deleted = true  -> Student is soft-deleted.
+
+        The record still exists in the database even after it is soft-deleted.
+        We can then use this field in our repository queries to exclude
+        deleted records from normal operations.
+    */
     private Boolean deleted;
+
 
     // Getters and setters are used by JPA/Hibernate to access and modify entity fields.
 
