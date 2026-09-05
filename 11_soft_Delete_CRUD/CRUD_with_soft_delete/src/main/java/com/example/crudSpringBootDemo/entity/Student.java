@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Student {
 
     @Id     // Marks this field as the primary key of the Student table.
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE) // use SEQUENCE or IDENTITY
     /*
     ⦁	We don’t set id manually instead we use auto incremental id, where we use @GeneratedType.
     If we don’t we and give  manually id’s there would be scenario when two id matched and latest one

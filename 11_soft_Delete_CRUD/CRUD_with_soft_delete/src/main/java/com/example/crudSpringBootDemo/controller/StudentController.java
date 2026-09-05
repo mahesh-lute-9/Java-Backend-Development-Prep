@@ -52,9 +52,13 @@ public class StudentController {
 
 
     // Read one student by ID
-    @GetMapping("/{id}")
+    @GetMapping
     // Example: GET /api/students/1
-    public ResponseEntity<Student> getStudent(@PathVariable Long id){
+    public ResponseEntity<Student> getStudent(@RequestParam Long id){   // now we'll be using @RequestParam
+        //	@PathVariable and @RequestParam these are the types endpoints where it attached with the requests,& methods.
+        // here Request parameter and variable name should be same
+        //	@RequestParam is used for multiple parameters & PathVariable used when there is just one variable as parameter
+
         // @PathVariable extracts the {id} value from the URL
         // and passes it to the method as a Java variable.
 
@@ -84,10 +88,10 @@ public class StudentController {
 
 
     // Update student
-    @PutMapping("/{id}")
+    @PutMapping
     // Example: PUT /api/students/1
     public ResponseEntity<Student> updateStudent(
-            @PathVariable Long id,
+            @RequestParam Long id,
             @RequestBody Student studentRequest){
 
         // id comes from the URL.
@@ -104,9 +108,9 @@ public class StudentController {
 
 
     // Delete student
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     // Example: DELETE /api/students/1
-    public ResponseEntity<String> deleteStudent(@PathVariable Long id){
+    public ResponseEntity<String> deleteStudent(@RequestParam Long id){
 
         Boolean isDeleted = studentService.deleteStudent(id);
 
@@ -119,9 +123,9 @@ public class StudentController {
 
 
     // soft-delete student
-    @PatchMapping("/{id}")
+    @PatchMapping
     // Example: PATCH /api/students/{id}
-    public ResponseEntity<String> softDeleteStudent(@PathVariable Long id){
+    public ResponseEntity<String> softDeleteStudent(@RequestParam Long id){
         Boolean isDeleted = studentService.deleteStudentSoftly(id);
 
         if(!isDeleted){
