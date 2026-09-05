@@ -20,16 +20,5 @@ Running record of topics covered, in order.
 | 12 | Spring Boot CRUD — Entity, Repository, Service, Controller | `10_SpringBoot_CRUD` | Done |
 | 13 | Next topic | — | Planned |
 
-## Notes
-
-**Spring Boot Annotations & Auto-Configuration** — `@SpringBootApplication` breakdown, starters, `@ConditionalOnClass` / `@ConditionalOnMissingBean`, `CommandLineRunner`.
-
-**Configuration & Runners** — externalized config, `@Value` vs `@ConfigurationProperties`, `CommandLineRunner` vs `ApplicationRunner`.
-
-**CRUD — Concepts & Architecture** — CRUD-to-HTTP mapping, layered architecture (Controller → Service → Repository → Database), project setup.
-
-**CRUD — Entity, Repository, Service, Controller** — JPA/Hibernate config, `@Entity`/`@Id`/`@GeneratedValue`, `JpaRepository`, `ResponseEntity` status handling.
-
-## Next Milestone
 
 Interview prep sprint — deferred until the concept series is complete.
