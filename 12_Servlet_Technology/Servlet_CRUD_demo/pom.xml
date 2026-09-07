@@ -1,36 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
     <artifactId>Servlet_CRUD_demo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-<!--  Making the packaging in war, by default it is JAR -->
+    <!--
+        WAR = Web Application Archive.
+
+        Maven projects are JAR by default, but a traditional Servlet
+        application is deployed to a Servlet container such as Tomcat,
+        so we package this application as a WAR.
+    -->
     <packaging>war</packaging>
 
 
-<!-- Adding dependencies -->
     <dependencies>
+
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>6.1.0</version>
+
+            <!--
+                "provided" means:
+
+                Maven provides this dependency while compiling the
+                application, but it does NOT package the dependency
+                inside the final WAR.
+
+                Why?
+
+                Because Tomcat (the Servlet container) already provides
+                the Servlet API at runtime.
+
+                In other words:
+
+                    Compile time → our project needs Servlet API
+                    Runtime     → Tomcat provides Servlet API
+
+                Without "provided", we could package the Servlet API
+                unnecessarily inside the WAR.
+            -->
             <scope>provided</scope>
-<!--    provided scope? why        -->
+
         </dependency>
+
     </dependencies>
 
+
     <build>
+
+        <!--
+            Name of the generated WAR file.
+
+            Example:
+                target/crud-app-servlet.war
+        -->
         <finalName>crud-app-servlet</finalName>
+
     </build>
 
+
     <properties>
+
+        <!--
+            Compile the project using Java 17 language/features.
+        -->
         <maven.compiler.source>17</maven.compiler.source>
+
+        <!--
+            Generate bytecode compatible with Java 17.
+        -->
         <maven.compiler.target>17</maven.compiler.target>
+
+        <!--
+            Ensures Maven uses UTF-8 when processing source/resource files.
+        -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
 
 </project>

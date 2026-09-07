@@ -9,44 +9,55 @@ import java.util.Map;
 
 public class UserService {
 
+    /*
+     * For now, HashMap acts as our in-memory database.
+     *
+     * Key   -> User ID
+     * Value -> User object
+     *
+     * Later, this will be replaced with DAO + JDBC + PostgreSQL.
+     */
     private final Map<Integer, User> userDB;
 
-    public UserService(){
+    public UserService() {
         userDB = new HashMap<>();
     }
 
-    // createUser()
-    public User createUser(User userReq){
-        userDB.put(userReq.getId(),userReq);
+    // CREATE
+    public User createUser(User userReq) {
+        userDB.put(userReq.getId(), userReq);
         return userReq;
     }
 
-    // getAllUsers()
-    public List<User> getAllUsers(){
-        List<User> usersResp = new ArrayList<>();
+    // READ - Get all users
+    public List<User> getAllUsers() {
+        return new ArrayList<>(userDB.values());
+    }
 
-        for(User user : userDB.values()){
-            usersResp.add(user);
+    // READ - Get user by ID
+    public User getUserById(Integer id) {
+        return userDB.get(id);
+    }
+
+    // UPDATE
+    public User updateUser(Integer id, User userReq) {
+
+        /*
+         * Before updating, check whether the user exists.
+         * Otherwise, an update request could create a new entry.
+         */
+        if (!userDB.containsKey(id)) {
+            return null;
         }
 
-        return usersResp;
+        userReq.setId(id);
+        userDB.put(id, userReq);
+
+        return userReq;
     }
 
-    // getUserById()
-    public User getUserById(Integer id){
-        return  userDB.getOrDefault(id,null);
+    // DELETE
+    public boolean deleteUser(Integer id) {
+        return userDB.remove(id) != null;
     }
-
-
 }
-
-
-//every servlet web app creates new endpoint as their name package name
-
-// Tomcat --> servlets
-/*
-LIFECYCLE:
-    init() --> PostConstruct
-    service() --> deGet(),..
-    destroy() --> PreDestroy()
- */
