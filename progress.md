@@ -19,7 +19,9 @@ Running record of topics covered, in order.
 | 11 | Spring Boot CRUD — Concepts & Architecture | `11_soft_Delete_CRUD` | Done |
 | 12 | Spring Boot CRUD — Entity, Repository, Service, Controller | `11_soft_Delete_CRUD` | Done |
 | 13 | Spring Boot CRUD — Soft Delete Implementation | `11_soft_Delete_CRUD` | Done |
-| 14 | Next topic | — | Planned |
+| 14 | Servlet Technology & JSP | `12_Servlet_Technology` | Done |
+| 15 | Spring MVC | `13_Spring_MVC` | Done |
+| 16 | Next topic | — | Planned |
 
 ## Next Milestone
 
