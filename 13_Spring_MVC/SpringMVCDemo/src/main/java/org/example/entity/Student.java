@@ -1,5 +1,17 @@
 package org.example.entity;
 
+/*
+ * Student represents the data/model of our application.
+ *
+ * It contains the information related to a student:
+ * - id
+ * - name
+ * - email
+ *
+ * This object is also used to receive request data and
+ * send response data in our Spring MVC application.
+ */
+
 public class Student {
 
     private Long id;
@@ -7,8 +19,9 @@ public class Student {
     private String email;
 
 
-
     // Getters and Setters
+    // These methods are used to access and modify the private fields.
+
     public Long getId() {
         return id;
     }

@@ -1,15 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+        <!--
+            ============================================================
+            MAVEN PROJECT CONFIGURATION - pom.xml
+            ============================================================
+
+            pom.xml = Project Object Model
+
+            This is the main configuration file of a Maven project.
+            It tells Maven:
+            1. What the project is called.
+            2. Which version of the project is being built.
+            3. Which external libraries/dependencies are required.
+            4. Which Java version should be used for compilation.
+            5. Other project-level build configurations.
+        -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--
+        modelVersion defines which POM model Maven should use.
+
+        4.0.0 is the standard and widely used Maven POM model version.
+    -->
     <modelVersion>4.0.0</modelVersion>
+
+
+    <!--
+        ============================================================
+        PROJECT IDENTIFICATION
+        ============================================================
+
+        groupId:
+        Identifies the organization/group that owns the project.
+
+        artifactId:
+        Identifies the actual project/application.
+
+        version:
+        Defines the current version of the project.
+
+        Together, these values uniquely identify the Maven artifact.
+
+        Example:
+        groupId    -> org.example
+        artifactId -> SpringMVCDemo
+        version     -> 1.0-SNAPSHOT
+    -->
 
     <groupId>org.example</groupId>
     <artifactId>SpringMVCDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
+    <!--
+        ============================================================
+        DEPENDENCIES
+        ============================================================
+
+        Dependencies are external libraries required by our
+        application.
+
+        Instead of manually downloading JAR files, Maven downloads
+        the required libraries from Maven repositories and adds them
+        to the project classpath.
+    -->
+
     <dependencies>
-        <!-- Spring MVC   -->
+
+        <!--
+            ========================================================
+            1. SPRING MVC
+            ========================================================
+
+            spring-webmvc provides the core Spring MVC functionality.
+
+            It gives us important Spring MVC components such as:
+            - DispatcherServlet
+            - @Controller
+            - @RequestMapping
+            - @GetMapping / @PostMapping
+            - HandlerMapping
+            - HandlerAdapter
+            - View resolution
+            - Request/response handling
+
+            In simple words:
+            This dependency gives our application the Spring MVC
+            framework required to build web applications.
+
+            Interview Point:
+            Q: What is Spring MVC?
+
+            A:
+            Spring MVC is a web framework provided by Spring that
+            follows the Model-View-Controller design pattern for
+            developing web applications.
+        -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -17,7 +106,47 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Embedded Tomcat   -->
+
+        <!--
+            ========================================================
+            2. EMBEDDED TOMCAT
+            ========================================================
+
+            tomcat-embed-core provides the embedded Tomcat server.
+
+            Tomcat acts as the web server / servlet container that
+            runs our Spring MVC application and handles HTTP requests.
+
+            Instead of deploying the application manually to an
+            externally installed Tomcat server, an embedded Tomcat
+            can be started directly from our Java application.
+
+            In simple words:
+
+            Client
+                |
+                | HTTP Request
+                v
+            Tomcat
+                |
+                v
+            Spring MVC
+                |
+                v
+            Controller
+
+            Interview Point:
+            Q: Why do we need Tomcat in a Spring MVC application?
+
+            A:
+            Tomcat provides the servlet container required to run the
+            web application and receive/process HTTP requests.
+
+            Note:
+            In Spring Boot, an embedded web server is commonly
+            provided through Spring Boot's web starter. Here we are
+            configuring the required dependencies more explicitly.
+        -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
@@ -25,19 +154,100 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Jackson  -->
+
+        <!--
+            ========================================================
+            3. JACKSON
+            ========================================================
+
+            jackson-databind is used for converting Java objects
+            to/from JSON.
+
+            This is especially useful when our Spring MVC controller
+            returns JSON responses.
+
+            Example:
+
+            Java Object
+                  |
+                  | Jackson serialization
+                  v
+            JSON Response
+
+            And the reverse:
+
+            JSON Request
+                  |
+                  | Jackson deserialization
+                  v
+            Java Object
+
+            Example:
+
+            Java:
+                Student student = new Student(1, "Mahesh");
+
+            JSON:
+                {
+                    "id": 1,
+                    "name": "Mahesh"
+                }
+
+            Interview Point:
+            Q: What is Jackson used for in Spring MVC?
+
+            A:
+            Jackson is commonly used to serialize Java objects into
+            JSON and deserialize JSON into Java objects.
+
+            This becomes particularly important when building REST
+            APIs.
+        -->
         <dependency>
             <groupId>tools.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>3.1.4</version>
             <scope>compile</scope>
         </dependency>
+
     </dependencies>
 
+
+    <!--
+        ============================================================
+        MAVEN / JAVA COMPILER CONFIGURATION
+        ============================================================
+
+        These properties tell Maven which Java version should be
+        used to compile the project.
+    -->
+
     <properties>
+
+        <!--
+            Java source version.
+
+            This tells Maven that our source code is written using
+            Java 17 language features.
+        -->
         <maven.compiler.source>17</maven.compiler.source>
+
+        <!--
+            Java target version.
+
+            This tells Maven to generate bytecode compatible with
+            Java 17.
+        -->
         <maven.compiler.target>17</maven.compiler.target>
+
+        <!--
+            Defines the character encoding used by the project.
+
+            UTF-8 supports a wide range of characters and is the
+            commonly preferred encoding for modern Java projects.
+        -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
 
 </project>
