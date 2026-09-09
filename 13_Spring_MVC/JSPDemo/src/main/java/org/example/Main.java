@@ -3,15 +3,16 @@ package org.example;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
+import org.apache.jasper.servlet.JasperInitializer;
 import org.example.config.WebConfig;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import java.io.File;
+import java.util.Set;
 
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws LifecycleException {
 
@@ -22,9 +23,11 @@ public class Main {
         tomcat.getConnector();
 
         String contextPath = "";
-        String baseDoc = new File("src/main/webapp").getAbsolutePath();
+        String baseDoc = new File("src/webapp").getAbsolutePath();
 
-        Context context = tomcat.addContext(contextPath, baseDoc);
+        Context context = tomcat.addWebapp(contextPath, baseDoc);
+
+        context.addServletContainerInitializer(new JasperInitializer(), Set.of());
 
         // IoC Container up
         AnnotationConfigWebApplicationContext springContext =
@@ -49,7 +52,4 @@ public class Main {
         // keep server running
         tomcat.getServer().await();
     }
-
 }
-
-// Student --> create, get --> HashMa
