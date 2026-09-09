@@ -14,11 +14,7 @@
     <open-files />
   </component>
   <component name="DBNavigator.Project.Settings">
-    <states>
-      <state category="SECRET_STORAGE_MIGRATION">
-        <migrated value="true" />
-      </state>
-    </states>
+    <states />
     <connections />
     <browser-settings>
       <general>
