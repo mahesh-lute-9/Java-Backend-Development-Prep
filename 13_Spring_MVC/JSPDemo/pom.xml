@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    pom.xml = Project Object Model
+
+    This file defines the Maven configuration of our JSP + Spring MVC project,
+    including project information, dependencies, and Java version.
+-->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Basic project information -->
     <groupId>org.example</groupId>
     <artifactId>JSPDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-        <!-- Spring MVC   -->
+
+        <!--
+            Spring MVC:
+            Provides the Spring MVC framework for handling
+            HTTP requests, controllers, models, and views.
+        -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -17,7 +33,11 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Embedded Tomcat   -->
+        <!--
+            Embedded Tomcat:
+            Provides the servlet container and web server
+            required to run our Spring MVC application.
+        -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
@@ -25,19 +45,36 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--  JSP Engine  -->
+        <!--
+            JSP Engine:
+            Apache Jasper is the JSP engine used by Tomcat
+            to compile and process JSP pages.
+        -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
             <version>11.0.24</version>
             <scope>compile</scope>
         </dependency>
+
     </dependencies>
 
     <properties>
+
+        <!--
+            Tells Maven that the source code is written
+            using Java 17.
+        -->
         <maven.compiler.source>17</maven.compiler.source>
+
+        <!--
+            Tells Maven to generate Java 17 compatible bytecode.
+        -->
         <maven.compiler.target>17</maven.compiler.target>
+
+        <!-- Character encoding used by the project -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
 
 </project>

@@ -1,45 +1,101 @@
+/*
+ * CSS for the Spring MVC + JSP Demo.
+ *
+ * This file handles the styling of the JSP page,
+ * including the layout, form, input, and button.
+ */
+
 body {
+    /* Sets the default font for the page. */
     font-family: Arial, sans-serif;
+
+    /* Gives the page a light background. */
     background-color: #f3f4f6;
+
+    /* Removes the browser's default margin. */
     margin: 0;
+
+    /* Adds space around the page content. */
     padding: 40px;
 }
 
+
 .container {
+    /* Limits the width of the main content. */
     max-width: 500px;
+
+    /* Centers the container horizontally. */
     margin: auto;
+
+    /* Gives the container a white background. */
     background-color: white;
+
+    /* Adds space inside the container. */
     padding: 30px;
+
+    /* Rounds the corners of the container. */
     border-radius: 12px;
+
+    /* Centers the text inside the container. */
     text-align: center;
+
+    /* Adds a subtle shadow around the container. */
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
+
 h1 {
+    /* Sets the color of the main heading. */
     color: #111827;
 }
 
+
 p {
+    /* Sets the size of the message displayed from the JSP Model. */
     font-size: 18px;
+
+    /* Sets the text color. */
     color: #374151;
 }
 
+
 input {
+    /* Adds space inside the text field. */
     padding: 10px;
+
+    /* Sets the width of the input field. */
     width: 70%;
+
+    /* Adds a light border. */
     border: 1px solid #ccc;
+
+    /* Rounds the input corners. */
     border-radius: 6px;
 }
 
+
 button {
+    /* Adds vertical and horizontal space inside the button. */
     padding: 10px 16px;
+
+    /* Removes the default button border. */
     border: none;
+
+    /* Rounds the button corners. */
     border-radius: 6px;
+
+    /* Sets the button background color. */
     background-color: #2563eb;
+
+    /* Makes the button text white. */
     color: white;
+
+    /* Changes the mouse cursor when hovering over the button. */
     cursor: pointer;
 }
 
+
 button:hover {
+    /* Changes the button color when the user hovers over it. */
     background-color: #1d4ed8;
 }
