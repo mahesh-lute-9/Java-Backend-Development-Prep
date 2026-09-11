@@ -53,3 +53,5 @@ public class CrudSpringBootDemoApplication {
 		);
 	}
 }
+
+// DTOs and Validations
