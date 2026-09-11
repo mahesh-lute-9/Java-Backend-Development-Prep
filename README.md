@@ -18,12 +18,14 @@ Each folder is a self-contained, runnable project for one concept, paired with i
 | `08_SpringBootCore` | Spring Boot annotations & auto-configuration |
 | `09_ApplicationProperties` | `application.properties`, `@Value`, `@ConfigurationProperties`, Runner interfaces |
 | `11_soft_Delete_CRUD` | Full CRUD REST API with soft delete — Entity, Repository, Service, Controller, `@RequestParam`, PostgreSQL |
+| `12_Servlet_Technology` | Servlet basics, CRUD demo with raw servlets |
+| `13_Spring_MVC` | Spring MVC framework fundamentals & JSP |
 
 New folders are added as the series progresses. See [`progress.md`](./progress.md) for the running log.
 
 ## Stack
 
-Java 17 · Spring Boot · Maven · PostgreSQL · IntelliJ IDEA
+Java 17 · Spring Boot · Spring MVC · Servlets/JSP · Maven · PostgreSQL · IntelliJ IDEA
 
 ## What's Next
 
