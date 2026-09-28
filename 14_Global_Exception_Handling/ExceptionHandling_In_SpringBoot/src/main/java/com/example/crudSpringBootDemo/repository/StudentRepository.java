@@ -7,22 +7,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    /*
-        Find one student by ID only when the student is active.
+    Optional<Student> findByIdAndDeletedIsFalse(Long id);
 
-        id = requested ID
-        deleted = false
-    */
-    Optional<Student> findByIdAndDeletedFalse(Long id);
+    List<Student> findByDeletedIsFalse();
 
+    Boolean existsByEmail(String emailId);
 
-    /*
-        Find all active students.
-
-        deleted = false
-    */
-    List<Student> findByDeletedFalse();
+    // findBy + fieldName + condition
 }

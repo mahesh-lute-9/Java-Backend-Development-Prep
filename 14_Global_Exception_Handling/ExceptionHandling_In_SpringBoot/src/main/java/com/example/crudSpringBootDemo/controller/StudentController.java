@@ -1,8 +1,9 @@
 package com.example.crudSpringBootDemo.controller;
 
-import com.example.crudSpringBootDemo.dto.CreateStudentRequestDTO;
-import com.example.crudSpringBootDemo.dto.StudentResponseDTO;
-import com.example.crudSpringBootDemo.dto.UpdateStudentRequestDTO;
+import com.example.crudSpringBootDemo.dto.CreateStudentRequestDto;
+import com.example.crudSpringBootDemo.dto.CreateStudentResponseDto;
+import com.example.crudSpringBootDemo.dto.UpdateStudentRequestDto;
+import com.example.crudSpringBootDemo.dto.UpdateStudentResponseDto;
 import com.example.crudSpringBootDemo.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -28,11 +29,11 @@ public class StudentController {
     // =========================================================
 
     @PostMapping
-    public ResponseEntity<StudentResponseDTO> createStudent(
-            @Valid @RequestBody CreateStudentRequestDTO requestDTO) {
+    public ResponseEntity<CreateStudentResponseDto> createStudent(
+            @Valid @RequestBody CreateStudentRequestDto requestDto) {
 
-        StudentResponseDTO response =
-                studentService.createStudent(requestDTO);
+        CreateStudentResponseDto response =
+                studentService.createStudent(requestDto);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -45,15 +46,11 @@ public class StudentController {
     // =========================================================
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentResponseDTO> getStudent(
+    public ResponseEntity<CreateStudentResponseDto> getStudent(
             @PathVariable Long id) {
 
-        StudentResponseDTO response =
+        CreateStudentResponseDto response =
                 studentService.getStudent(id);
-
-        if (response == null) {
-            return ResponseEntity.notFound().build();
-        }
 
         return ResponseEntity.ok(response);
     }
@@ -64,22 +61,10 @@ public class StudentController {
     // =========================================================
 
     @GetMapping
-    public ResponseEntity<List<StudentResponseDTO>> getAllStudents() {
+    public ResponseEntity<List<CreateStudentResponseDto>> getAllStudents() {
 
-        List<StudentResponseDTO> students =
-                studentService.getAllStudents();
-
-        /*
-            An empty list is still a successful GET response.
-
-            Therefore:
-
-            [] -> 200 OK
-
-            instead of:
-
-            404 NOT FOUND
-        */
+        List<CreateStudentResponseDto> students =
+                studentService.getAllStudent();
 
         return ResponseEntity.ok(students);
     }
@@ -90,16 +75,12 @@ public class StudentController {
     // =========================================================
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentResponseDTO> updateStudent(
+    public ResponseEntity<UpdateStudentResponseDto> updateStudent(
             @PathVariable Long id,
-            @Valid @RequestBody UpdateStudentRequestDTO requestDTO) {
+            @Valid @RequestBody UpdateStudentRequestDto requestDto) {
 
-        StudentResponseDTO response =
-                studentService.updateStudent(id, requestDTO);
-
-        if (response == null) {
-            return ResponseEntity.notFound().build();
-        }
+        UpdateStudentResponseDto response =
+                studentService.updateStudent(id, requestDto);
 
         return ResponseEntity.ok(response);
     }
@@ -113,16 +94,9 @@ public class StudentController {
     public ResponseEntity<String> deleteStudent(
             @PathVariable Long id) {
 
-        boolean deleted =
-                studentService.deleteStudent(id);
+        studentService.deleteStudent(id);
 
-        if (!deleted) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(
-                "Student permanently deleted"
-        );
+        return ResponseEntity.noContent().build();
     }
 
 
@@ -134,31 +108,8 @@ public class StudentController {
     public ResponseEntity<String> softDeleteStudent(
             @PathVariable Long id) {
 
-        boolean deleted =
-                studentService.softDeleteStudent(id);
+        studentService.deleteStudentSoftly(id);
 
-        if (!deleted) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(
-                "Student deleted successfully"
-        );
+        return ResponseEntity.noContent().build();
     }
 }
-
-// here till now our controller is doing alot of things, it has to do just data transfer not checking validations and all
-// so here comes the exception classes
-
-
-// before exception handling lets discus about HTTP status code:
-/*
-There are multiple type families, starts with
-    1xx --> informational
-    2xx --> success calls
-    3xx --> Redirections
-    4xx --> Client side errors
-    5xx --> Server side errors
- */
-
-// ResponseEntity class gives us methods about: body, status and headers
