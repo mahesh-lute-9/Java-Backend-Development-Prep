@@ -11,3 +11,14 @@ public class ProfileDemoApplication {
 	}
 
 }
+
+
+
+// Environments: Local, Dev, QA/staging, prod
+
+// code --> main logic (Do not change)
+// Configurations --> Do change
+
+// configuration files - .properties, .yaml or external configurations
+// .properties files use dotted/flat naming convention with key=value pairs
+// .yml here tge configurations gets stored in tree like structure
