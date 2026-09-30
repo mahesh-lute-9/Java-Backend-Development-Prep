@@ -22,3 +22,12 @@ public class ProfileDemoApplication {
 // configuration files - .properties, .yaml or external configurations
 // .properties files use dotted/flat naming convention with key=value pairs
 // .yml here tge configurations gets stored in tree like structure
+// if we have both .yml and .properties config file then our SpringBoot prefers the .properties file as default
+// profiling - making diff. .properties files for diff environments like: application-{profile}.properties
+
+// HOW WE CAN ADD configurations EXTERNALLY
+// Commandline, environment variables, CI/CD pipeline, kubernates, OS
+
+// via commandline we use :  mvn spring-boot:run -Dspring-boot.run.profiles=staging(profile specific)
+// here your maven should work properly, if it installed locally it would be better
+
